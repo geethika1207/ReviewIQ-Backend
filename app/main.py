@@ -1,10 +1,13 @@
 from fastapi import FastAPI
 from .db import models
-from .db.database import engine
-from .routers import auth
+from .db.database import engine, Base
+from .routers import auth, code, history
 
-models.Base.metadata.create_all(bind=engine)
+#Base.metadata.drop_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
 app.include_router(auth.router)
+app.include_router(code.router)
+app.include_router(history.router)

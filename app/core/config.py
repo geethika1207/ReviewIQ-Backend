@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     ACCESS_EXPIRETIME_MINUTES : int
     SECRET_KEY : str
     ALGORITHM : str
+    API_KEY : str
     class Config:
         env_file = str(ROOT_DIR / ".env")
 
