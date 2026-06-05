@@ -230,7 +230,6 @@ def ask_groq(prompt: str) -> str:
     print(raw)
     print("=== END RAW ===")
 
-    # Remove markdown code blocks if present
     raw = raw.strip()
     if raw.startswith("```json"):
         raw = raw[7:]
