@@ -15,15 +15,20 @@ class BugsResponse(BaseModel):
     class Config:
         orm_mode = True
 
+class MessagesResponse(BaseModel):
+    question : str
+    answer : str
 
 class CodeResponse(BaseModel):
     submission_id : int
     language : str
+    code : str
     bugs : list[BugsResponse] = []
     summary : str
     positive_aspects : Optional[list] = None
     learning_tags : Optional[list] = None
     suggestions : Optional[list] = None
+    messages : list[MessagesResponse] = []
 
     class Config:
         orm_mode = True 

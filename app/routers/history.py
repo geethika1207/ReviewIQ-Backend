@@ -16,14 +16,25 @@ def get_submission(id:int, db:Session=Depends(get_db), current_user = Depends(ge
      
     my_review = submitted_code.Reviews
     some_bugs = submitted_code.Reviews.bugs
+    my_messages = submitted_code.chats
+
+    result = []
+    for message in my_messages:
+        result.append({
+                        "question" : message.question,
+                        "answer" : message.answer
+        })
+
     return {
                "submission_id" : submitted_code.id,
                "language" : submitted_code.language,
+               "code" : submitted_code.code,
                "bugs" : some_bugs,
                "summary" : my_review.Summary,
                "positive_aspects" : my_review.Positive_aspects,
                "learning_tags" : my_review.Learning_tags,
-               "suggestions" : my_review.Suggestions 
+               "suggestions" : my_review.Suggestions,
+               "messages" : result
     }
 
 @router.get("/history")
@@ -44,6 +55,9 @@ def get_history(limit:int=10, offset:int = 0, db:Session=Depends(get_db), curren
             "id" : submit_code.id,
             "code" : code_preview,
             "language" : submit_code.language,
+            "created_at": submit_code.created_at,  
+            "critical_bugs": sum(1 for b in submit_code.Reviews.bugs if b.Severity == "CRITICAL"),  
+            "major_bugs": sum(1 for b in submit_code.Reviews.bugs if b.Severity == "MAJOR")
         }
         )
     return result
