@@ -10,7 +10,7 @@ The platform is designed to go beyond static code analysis by providing an inter
 
 🔗 **Frontend:** https://reviewiq-ai.lovable.app
 
-🔗 **Backend API:** https://reviewiq-m3c5.onrender.com
+🔗 **Backend API:** https://reviewiq-m3c5.onrender.com/docs
 
 ---
 
